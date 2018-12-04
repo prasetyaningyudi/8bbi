@@ -18,9 +18,15 @@ a{
 	background-color: rgba(33,33,33,1);
 	color: #ffffff;
 }
-.top .icon{
+.top a{
+	text-decoration:none;
+	color: #ffffff;
+}
+
+.top .icon, .top a .icon{
 	color: rgba(253,140,64,1);
 }
+
 .top .info{
 	margin-right: 20px;
 }
@@ -356,6 +362,9 @@ a.readmore:hover{
 	background-color: #121212;
 	color: #bdbdbd;
 	height: 53px;
+}
+.footer a{
+	color: #EEEEEE;
 }
 .footer .icon{
 	color: #FF9C46
