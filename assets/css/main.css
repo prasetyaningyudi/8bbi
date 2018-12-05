@@ -14,7 +14,7 @@ a{
 }
 
 .top{
-	height: 56px;
+	min-height: 56px;
 	background-color: rgba(33,33,33,1);
 	color: #ffffff;
 }
@@ -151,7 +151,7 @@ a.nav-link:hover{
 	padding: 5px 20px;
 }
 
-@media (max-width: 576px) {
+@media only screen and (max-width: 576px) {
 	.top .slogan{
 		display:none;
 	}	
@@ -162,11 +162,11 @@ a.nav-link:hover{
 		display:none;
 	}
 	.cover .title{
-		font-size: 50px;
+		font-size: 30px;
 	}
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
 	.top .slogan{
 		display:none;
 	}
@@ -177,19 +177,19 @@ a.nav-link:hover{
 		display:none;
 	}
 	.cover .title{
-		font-size: 50px;
+		font-size: 30px;
 	}	
 }
 
-@media (max-width: 992px) {
+@media only screen and (max-width: 992px) {
 	.cover .title, .cover-nohome .title{
-		font-size: 50px;
+		font-size: 40px;
 	}	
 }
 
-@media (max-width: 1200px) {
+@media only screen and (max-width: 1200px) {
 	.cover .title, .cover-nohome .title{
-		font-size: 50px;
+		font-size: 40px;
 	}	
 }
 

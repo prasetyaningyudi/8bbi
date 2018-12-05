@@ -3,8 +3,8 @@
 		<div class="row">     
 			<div class="col-12">
 				FAST &amp; RELIABLE<br>
-				<h2>TRANSPORT<br>
-				INQUIRY</h2>
+				<h3>TRANSPORT<br>
+				INQUIRY</h3>
 				<div class="main">
 					Send us your transport inquiry – we are pleased to send you an offer without obligation. <br>Our solutions are tailored on your individual requirements.
 				</div>
