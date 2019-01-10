@@ -28,12 +28,13 @@
 					  <thead class="thead-dark">
 						<tr>
 						  <th scope="col">#</th>
-						  <th scope="col">Tracking Number</th>
-						  <th scope="col">Date</th>
-						  <th scope="col">Time</th>
-						  <th scope="col">Location</th>
-						  <th scope="col">Status</th>
-						  <th scope="col">Services</th>
+						  <th scope="col">AWB</th>
+						  <th scope="col">Tgl Pickup</th>
+						  <th scope="col">Tgl Berangkat</th>
+						  <th scope="col">Tujuan</th>
+						  <th scope="col">Tgl Terima</th>
+						  <th scope="col">Penerima</th>
+						  <th scope="col">Keterangan</th>
 						</tr>
 					  </thead>
 					  <tbody>		
@@ -44,12 +45,13 @@
 								foreach($data as $val){
 									echo '<tr>';
 									echo '<th scope="row">'.$i.'</th>';
-									echo '<td>'.$val->bbi_number.'</td>';
-									echo '<td>'.$val->process_date.'</td>';
-									echo '<td>'.$val->process_time.'</td>';
-									echo '<td>'.$val->LOCATION_NAME.'</td>';
-									echo '<td>'.$val->status.'</td>';
-									echo '<td>'.$val->services.'</td>';
+									echo '<td>'.$val->awb.'</td>';
+									echo '<td>'.$val->tgl_pickup.'</td>';
+									echo '<td>'.$val->tgl_brgkt.'</td>';
+									echo '<td>'.$val->tujuan.'</td>';
+									echo '<td>'.$val->tgl_terima.'</td>';
+									echo '<td>'.$val->penerima.'</td>';
+									echo '<td>'.$val->keterangan.'</td>';
 									$i++;
 									echo '</tr>';
 								}

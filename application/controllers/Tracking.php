@@ -17,7 +17,7 @@ class Tracking extends CI_Controller {
 	public function index(){	
 		if(isset($_POST['submit'])){
 			$filters = array();
-			$filters[] = " BBI_NUMBER = '".$_POST['track_numb']."'";
+			$filters[] = " ('".$_POST['track_numb']."')";
 			$this->data['data'] = $this->tracking_model->get($filters);
 			//var_dump($this->data['data'] );
 		}
