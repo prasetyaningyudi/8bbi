@@ -15,8 +15,8 @@
     <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
     <!-- bootstrap-daterangepicker -->
-    <script src="<?php //echo base_url(); ?>assets/vendors/moment/min/moment.min.js"></script>
-    <script src="<?php //echo base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/moment/min/moment.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>

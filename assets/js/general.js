@@ -296,6 +296,37 @@ $('.paging').on('click','a.page-link',function(){
 	return false;
 });
 
+$('.button-xls').on('click',function(){
+	console.log('xls click');
+	var current_offset = ($(this).attr('numb') - 1) * globallimit;
+	if(fromfilter == false){
+		var datainput='{';
+		//datainput += '"offset":'+current_offset+',';
+		datainput += '"submit":"submit",';
+		datainput += '"expected_output":"xls"';		
+		datainput += '}';
+		//console.log(datainput);
+	}else{
+		var datainput = generate_json_from_field("#form-filter");
+		datainput.length;
+		datainput = datainput.slice(0,(datainput.length-1));
+		datainput += ',"expected_output":"xls"';
+		//datainput += ',"offset":"'+current_offset+'"';
+		datainput += '}';
+		//console.log(datainput);
+	}
+	$.ajax({
+		type : "POST",
+		url  : targeturl+'/list',
+		dataType : "JSON",
+		data : JSON.parse(datainput),
+		success: function(data){
+			//get_data(data);
+		}
+	});
+	return false;
+});
+
 function get_data(data){
 	console.log('from filter : '+fromfilter);
 	the_data = data;

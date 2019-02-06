@@ -7,7 +7,7 @@ class Report extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->library('auth');			
+		$this->load->library('auth');						
 		$this->load->helper('url');			
 		$this->load->database();
 		$this->load->model('report_model');
@@ -165,16 +165,30 @@ class Report extends CI_Controller {
 				'statusable'=> false,
 				'detailable'=> false,
 				'pdf'		=> false,
-				'xls'		=> false,
+				'xls'		=> true,
 				'pagination'=> $limit,
 				'filters'  	=> $fields,
 				'toolbars'	=> null,
 				'header'  	=> $header,
 				'body'  	=> $body,
 				'footer'  	=> null,
+				'title'		=> 'POD Reporting'
 			)
-		);		
-		echo json_encode($this->data['list']);
+		);
+		
+		if((isset($_POST['expected_output']))){
+			if($_POST['expected_output'] == 'pdf'){
+				//pdf goes here
+			}else if ($_POST['expected_output'] == 'xls') {
+				$parameter = array (
+					'content' => $this->data['list']
+				);				
+				$this->load->library('generatexls', $parameter);
+				$this->generatexls->generate_xls();
+			}
+		}else{
+			echo json_encode($this->data['list']);
+		}		
 	}
 	
 	public function insert(){
