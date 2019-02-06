@@ -1,6 +1,8 @@
 var the_data;
 var targeturl;
 var fromfilter;
+var frompaging;
+var current_offset;
 var globallimit;
 var globalform;
 var field_data;
@@ -131,6 +133,7 @@ $('#button-submit-filter').on('click',function(){
 		data : JSON.parse(datainput),
 		success: function(data){
 			from_filter(true);
+			frompaging = false;
 			get_data(data);
 			$('body').toggleClass('full-width semi-width');
 		}
@@ -270,7 +273,7 @@ function set_pagination(){
 }
 
 $('.paging').on('click','a.page-link',function(){
-	var current_offset = ($(this).attr('numb') - 1) * globallimit;
+	current_offset = ($(this).attr('numb') - 1) * globallimit;
 	if(fromfilter == false){
 		var datainput='{';
 		datainput += '"offset":'+current_offset+',';
@@ -284,6 +287,7 @@ $('.paging').on('click','a.page-link',function(){
 		datainput += ',"offset":"'+current_offset+'"}';
 		//console.log(datainput);
 	}
+	frompaging = true;
 	$.ajax({
 		type : "POST",
 		url  : targeturl+'/list',
@@ -298,23 +302,26 @@ $('.paging').on('click','a.page-link',function(){
 
 $('.button-xls').on('click',function(){
 	console.log('xls click');
-	var current_offset = ($(this).attr('numb') - 1) * globallimit;
 	if(fromfilter == false){
 		var datainput='{';
-		//datainput += '"offset":'+current_offset+',';
-		datainput += '"submit":"submit",';
-		datainput += '"expected_output":"xls"';		
-		datainput += '}';
+		//
+		datainput += '"submit":"submit"';
 		//console.log(datainput);
 	}else{
 		var datainput = generate_json_from_field("#form-filter");
 		datainput.length;
 		datainput = datainput.slice(0,(datainput.length-1));
-		datainput += ',"expected_output":"xls"';
 		//datainput += ',"offset":"'+current_offset+'"';
-		datainput += '}';
 		//console.log(datainput);
 	}
+	if(frompaging == true){
+		datainput += ',"offset":'+current_offset;
+	}
+	
+	datainput += ',"expected_output":"xls"';		
+	datainput += '}';
+
+		
 	$.ajax({
 		type : "POST",
 		url  : targeturl+'/list',
