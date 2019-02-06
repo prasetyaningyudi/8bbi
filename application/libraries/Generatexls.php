@@ -23,7 +23,9 @@ class Generatexls {
 	public function __construct($content){
 		error_reporting(E_ALL);
 		ini_set('display_errors', 'On');
+		//var_dump($content);die;
 		$this->_content = $content[0];
+		//var_dump($this->_content);die;
 		$this->_cursor_a = 'A';
 		$this->_cursor_b = '1';
 		ob_clean();		

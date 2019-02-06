@@ -176,12 +176,15 @@ class Report extends CI_Controller {
 			)
 		);
 		
+		
+		
 		if((isset($_POST['expected_output']))){
 			if($_POST['expected_output'] == 'pdf'){
 				//pdf goes here
 			}else if ($_POST['expected_output'] == 'xls') {
+				//var_dump($this->data['list']);die;
 				$parameter = array (
-					'content' => $this->data['list']
+					$this->data['list']
 				);				
 				$this->load->library('generatexls', $parameter);
 				$this->generatexls->generate_xls();
