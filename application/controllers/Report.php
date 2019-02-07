@@ -164,7 +164,7 @@ class Report extends CI_Controller {
 				'deletable'	=> false,
 				'statusable'=> false,
 				'detailable'=> false,
-				'pdf'		=> false,
+				'pdf'		=> true,
 				'xls'		=> true,
 				'pagination'=> $limit,
 				'filters'  	=> $fields,
@@ -179,6 +179,7 @@ class Report extends CI_Controller {
 		
 		
 		if((isset($_POST['expected_output']))){
+			//var_dump($_POST['expected_output']);
 			if($_POST['expected_output'] == 'pdf'){
 				//pdf goes here
 			}else if ($_POST['expected_output'] == 'xls') {
@@ -191,7 +192,7 @@ class Report extends CI_Controller {
 			}
 		}else{
 			echo json_encode($this->data['list']);
-		}		
+		}				
 	}
 	
 	public function insert(){

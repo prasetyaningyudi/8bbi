@@ -140,12 +140,12 @@
 						</a>
 					</div>									
 					<div class="button-toolbar-item button-pdf">
-						<a href="javascript:void(0)">
+						<a href="javascript:void(0)" onclick="expected_output('pdf')">
 							<i style="font-size: 16px;" class="fas fa-file-pdf"></i><br>PDF
 						</a>
 					</div>						
 					<div class="button-toolbar-item button-xls">
-						<a href="javascript:void(0)">
+						<a href="javascript:void(0)" onclick="expected_output('xls')">
 							<i style="font-size: 16px;" class="fa fa-file-excel"></i><br>XLS
 						</a>
 					</div>					

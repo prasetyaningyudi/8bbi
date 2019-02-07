@@ -23,9 +23,7 @@ class Generatexls {
 	public function __construct($content){
 		error_reporting(E_ALL);
 		ini_set('display_errors', 'On');
-		//var_dump($content);die;
 		$this->_content = $content[0];
-		//var_dump($this->_content);die;
 		$this->_cursor_a = 'A';
 		$this->_cursor_b = '1';
 		ob_clean();		
@@ -39,17 +37,14 @@ class Generatexls {
 		$this->_objPHPExcel = new PHPExcel();
 		$title = $this->set_title();
 		$titleXLS = $title.'.xlsx';
-		$this->_objPHPExcel->getProperties()->setCreator("SITP - DJPBN - KEMENKEU")
-									 ->setLastModifiedBy("SITP - DJPBN - KEMENKEU")
+		$this->_objPHPExcel->getProperties()->setCreator("Yudi Prasetyo")
+									 ->setLastModifiedBy("Yudi Prasetyo")
 									 ->setTitle($title)
 									 ->setSubject($title)
 									 ->setDescription($title)
-									 ->setKeywords("sitp omspan xls")
-									 ->setCategory("sitp omspan xls");		
+									 ->setKeywords("utakata xls")
+									 ->setCategory("utakata xls");		
 
-		//$pdf->set_html($this->set_pdf_header());
-		
-		
 		//$this->set_html();
 
 		// This method has several options

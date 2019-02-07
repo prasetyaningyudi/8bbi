@@ -300,39 +300,74 @@ $('.paging').on('click','a.page-link',function(){
 	return false;
 });
 
-$('.button-xls').on('click',function(){
-	console.log('xls click');
+function expected_output(type){
+	if(type == 'xls'){
+		console.log('xls generate');
+	}else if(type == 'pdf'){
+		console.log('pdf generate');
+	}
 	if(fromfilter == false){
-		var datainput='{';
-		//
-		datainput += '"submit":"submit"';
-		//console.log(datainput);
+		var datainput='';
+		datainput += 'submit=submit';
 	}else{
-		var datainput = generate_json_from_field("#form-filter");
-		datainput.length;
-		datainput = datainput.slice(0,(datainput.length-1));
-		//datainput += ',"offset":"'+current_offset+'"';
-		//console.log(datainput);
+		var datainput = generate_param_from_field("#form-filter");
 	}
 	if(frompaging == true){
-		datainput += ',"offset":'+current_offset;
+		datainput += '&offset='+current_offset;
 	}
+	if(type == 'xls'){
+		datainput += '&expected_output=xls';
+	}else if(type == 'pdf'){
+		datainput += '&expected_output=pdf';
+	}	
 	
-	datainput += ',"expected_output":"xls"';		
-	datainput += '}';
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if (this.readyState == 4 && this.status == 200) {
 
-		
-	$.ajax({
-		type : "POST",
-		url  : targeturl+'/list',
-		dataType : "JSON",
-		data : JSON.parse(datainput),
-		success: function(data){
-			//get_data(data);
 		}
-	});
+	}
+	xhr.open('POST', targeturl+'/list', true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.responseType = 'blob';
+	xhr.onload = function() {
+		// Only handle status code 200
+		if(xhr.status === 200) {
+			// Try to find out the filename from the content disposition `filename` value
+			var filename = '';
+			if (xhr.getResponseHeader('Content-Disposition').indexOf('"') > -1) {
+				filename = xhr.getResponseHeader('Content-Disposition').match(/filename="(.+)"/)[1];
+			} else {
+				filename = xhr.getResponseHeader('Content-Disposition').match(/Filename=(.+)/)[1];
+			}
+			if (filename[filename.length-1] == '"') {
+				filename = filename.substring(filename, filename.length - 1);
+			}
+			console.log(filename);
+			
+			// The actual download
+			if(type == 'xls'){
+				var blob = new Blob([xhr.response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+			}else if(type == 'pdf'){
+				var blob = new Blob([xhr.response], { type: 'application/pdf' });
+			}			
+			
+			var link = document.createElement('a');
+			link.href = window.URL.createObjectURL(blob);
+			link.download = filename;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		}
+
+	  // some error handling should be done here...
+	};
+	
+	//console.log(datainput);
+	xhr.send(datainput); 			
+	
 	return false;
-});
+}
 
 function get_data(data){
 	console.log('from filter : '+fromfilter);
@@ -515,6 +550,50 @@ function generate_json_from_field(selector){
 		i++;
 	});
 	datainput += '}';
+	return datainput;
+}
+
+function generate_param_from_field(selector){
+	console.log('generate param from field form');
+	var field = $(selector).find( "[name]" );
+	var datainput='';
+	var i= 0;
+	$(field).each(function(index,element){
+		if($(this).is(':checkbox')){
+			if($(this).is( ':checked' )){
+				datainput += ''+element.name+'';
+				datainput += '=';
+				datainput += ''+element.value+'';
+				if(i != field.length -1 ){
+					datainput += '&';
+				}
+			}else{
+				datainput += ''+element.name+'';
+				datainput += '=';				
+				datainput += 'off';
+				if(i != field.length -1 ){
+					datainput += '&';
+				}
+			}
+		}else if($(this).is(':radio')){
+			if($(this).is( ':checked' )){
+				datainput += ''+element.name+'';
+				datainput += '=';
+				datainput += ''+element.value+'';
+				if(i != field.length -1 ){
+					datainput += '&';
+				}
+			}
+		}else{
+			datainput += ''+element.name+'';
+			datainput += '=';
+			datainput += ''+element.value+'';
+			if(i != field.length -1 ){
+				datainput += '&';
+			}
+		}		
+		i++;
+	});
 	return datainput;
 }
 
