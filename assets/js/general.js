@@ -438,7 +438,10 @@ function set_daterange(){
 	for(i=0;i<field_data.length;i++){
 		if(field_data[i].type == 'daterange'){
 			$('input[name="'+field_data[i].name+'"]').daterangepicker({
+				startDate: "2019-01-01",
+				endDate: "2019-12-31",		
 				locale: {
+				  cancelLabel: 'Clear',
 				  format: field_data[i].format,
 				}
 			});
